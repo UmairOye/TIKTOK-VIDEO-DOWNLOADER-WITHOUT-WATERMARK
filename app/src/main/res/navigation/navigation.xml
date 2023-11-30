@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/action_home">
+
+    <fragment
+        android:id="@+id/action_home"
+        android:name="com.example.tiktokvideodownloaderwithoutwatermark.ui.fragments.Home"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_action_home_to_action_download"
+            app:destination="@id/action_download" />
+    </fragment>
+    <fragment
+        android:id="@+id/action_download"
+        android:name="com.example.tiktokvideodownloaderwithoutwatermark.ui.fragments.Download"
+        android:label="fragment_download"
+        tools:layout="@layout/fragment_download" >
+        <action
+            android:id="@+id/action_action_download_to_mediaItems"
+            app:destination="@id/mediaItems" />
+    </fragment>
+    <fragment
+        android:id="@+id/mediaItems"
+        android:name="com.example.tiktokvideodownloaderwithoutwatermark.ui.fragments.MediaItems"
+        android:label="fragment_media_items"
+        tools:layout="@layout/fragment_media_items" />
+    <fragment
+        android:id="@+id/action_settings"
+        android:name="com.example.tiktokvideodownloaderwithoutwatermark.ui.fragments.AppSettings"
+        android:label="fragment_app_settings"
+        tools:layout="@layout/fragment_app_settings" >
+        <action
+            android:id="@+id/action_action_settings_to_privacyPolicy"
+            app:destination="@id/privacyPolicy" />
+    </fragment>
+    <fragment
+        android:id="@+id/privacyPolicy"
+        android:name="com.example.tiktokvideodownloaderwithoutwatermark.ui.fragments.PrivacyPolicy"
+        android:label="fragment_privacy_policy"
+        tools:layout="@layout/fragment_privacy_policy" />
+</navigation>

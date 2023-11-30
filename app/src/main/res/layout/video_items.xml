@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cdMain"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_60sdp"
+    android:layout_margin="@dimen/_5sdp"
+    android:background="@drawable/editext_bg">
+
+    <ImageView
+        android:id="@+id/tvImg_Media"
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_45sdp"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@string/img_profile"
+        android:scaleType="centerCrop"
+        android:src="@drawable/profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvVideoName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="marquee"
+        android:fontFamily="@font/poppins"
+        android:includeFontPadding="false"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:text="@string/textview"
+        android:textSize="@dimen/_11ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvImg_Media"
+        app:layout_constraintEnd_toStartOf="@+id/imgMore"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tvImg_Media"
+        app:layout_constraintTop_toTopOf="@+id/tvImg_Media"
+        app:layout_constraintVertical_bias="0.35" />
+
+    <TextView
+        android:id="@+id/tvVideoDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:includeFontPadding="false"
+        android:text="@string/_11_mb_0_34"
+        android:textSize="@dimen/_9ssp"
+        app:layout_constraintEnd_toEndOf="@+id/tvVideoName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvVideoName"
+        app:layout_constraintTop_toTopOf="@+id/tvVideoName"
+        app:layout_goneMarginTop="2dp" />
+
+    <ImageView
+        android:id="@+id/imgMore"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/close_ripple_effect"
+        android:contentDescription="@string/clear_text"
+        app:layout_constraintBottom_toBottomOf="@+id/tvImg_Media"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvImg_Media"
+        app:srcCompat="@drawable/baseline_more_vert_24" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

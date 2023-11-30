@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="bg_color">#fff</color>
+
+    <color name="bg_video_items">#fff</color>
+    <color name="bg_video_items_border">#A6A5A5</color>
+
+    <color name="bg_navigation_bar">#36454F</color>
+
+    <color name="icon_color">#000</color>
+
+    <color name="video_items_bg">#fff</color>
+
+</resources>

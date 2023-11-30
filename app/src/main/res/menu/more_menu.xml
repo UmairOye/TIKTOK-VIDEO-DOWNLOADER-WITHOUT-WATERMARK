@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="@string/share"
+        android:id="@+id/action_share"
+        />
+
+    <item
+        android:title="@string/view"
+        android:id="@+id/action_view"
+        />
+
+
+</menu>

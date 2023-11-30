@@ -1,0 +1,76 @@
+<resources>
+    <string name="app_name">TK Video Downloader</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tiktok_video_downloader">Tiktok Video Downloader</string>
+    <string name="enter_tiktok_url">Enter Tiktok Url</string>
+    <string name="download">Download</string>
+
+    <string name="user_agent_string">Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.4) Gecko/20100101 Firefox/117.0</string>
+    <string name="whatsapp_host">.tiktok.com</string>
+    <string name="media_permission">Media Permission</string>
+    <string name="please_allow_media_permission_to_continue">Please allow media permission to continue…</string>
+    <string name="video_url">video_url</string>
+    <string name="video_items">video items</string>
+    <string name="_25_mb">25 MB</string>
+    <string name="_0_00">0:00</string>
+    <string name="tiktok_downloder">TK Downloder</string>
+    <string name="paste_tiktok_link_here">Paste Tiktok link here…</string>
+    <string name="home">Home</string>
+    <string name="app_settings">app_settings</string>
+    <string name="no_ads">no_ads</string>
+    <string name="paste">Paste</string>
+    <string name="clear_text">clear_text</string>
+    <string name="video_mp4">video.mp4</string>
+    <string name="fetching_link_please_wait_it_takes_some_seconds">Fetching link please wait, it takes\nsome seconds…</string>
+    <string name="download_without_watermark">Download without WaterMark</string>
+    <string name="download_without_watermark_hd">Download without WaterMark (HD)</string>
+    <string name="download_original_video">Download Original Video</string>
+    <string name="download_audio_mp3">Download Audio (MP3)</string>
+    <string name="img_profile">img_profile</string>
+    <string name="folder">folder</string>
+    <string name="videos">Videos</string>
+    <string name="_1">(1)</string>
+    <string name="_11_mb_0_34">11 MB - 0.34</string>
+    <string name="textview">TextView</string>
+    <string name="share">Share</string>
+    <string name="view">View</string>
+
+    <string name="banner_is_implemented_below_you_can_check_it_out">Banner is implemented below, you can check it out</string>
+    <string name="small_native_ad">Small Native Ad</string>
+    <string name="this_is_your_native_ad_i_hope_you_like_it">This is your native ad, i hope you like it?</string>
+    <string name="close">Close</string>
+    <string name="reward_ads_is_not_ready_yet">Reward ads is not ready yet</string>
+    <string name="the_interstitial_ad_wasn_t_ready_yet">The interstitial ad wasn\'t ready yet.</string>
+    <string name="ad_showed_fullscreen_content">Ad showed fullscreen content.</string>
+    <string name="ad_recorded_an_impression">Ad recorded an impression.</string>
+    <string name="ad_was_clicked">Ad was clicked.</string>
+    <string name="ad_dismissed_fullscreen_content">Ad dismissed fullscreen content.</string>
+    <string name="ad_failed_to_show_fullscreen_content">Ad failed to show fullscreen content.</string>
+    <string name="admob_ads_are_not_loaded_yet">Admob ads are not loaded yet!</string>
+    <string name="large_native_ads">Large native Ads</string>
+
+    <string name="settings">Settings</string>
+    <string name="rate">Rate</string>
+    <string name="rate_us">Rate us</string>
+    <string name="storage">Storage</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="app_version">App Version</string>
+    <string name="privacy_policy_">This Privacy Policy describes how your personal information is collected, used, and shared when you use the TikTok Video Downloader App.</string>
+    <string name="information_we_collect">Information We Collect:</string>
+    <string name="information_we_collect_">The TikTok Video Downloader App does not collect any personally identifiable information about you. However, the app may request permission to access your device\'s external storage to save downloaded video and audio files. This permission is necessary for the proper functioning of the app.</string>
+    <string name="downloaded_files">Downloaded Files</string>
+    <string name="downloaded_files_">The app allows users to download TikTok videos and audio in three different qualities: original, HD without watermark, and normal without watermark. These downloaded files are stored in the external storage of your device, and the app requires external storage permission to save these files.</string>
+    <string name="usage_of_downloaded_files">Usage of Downloaded Files</string>
+    <string name="policy_3">The TikTok Video Downloader App provides a feature to view and share the downloaded video and audio files. The app does not access or store any personal information related to the content of the downloaded files.</string>
+    <string name="sharing_features">Sharing Features</string>
+    <string name="policy_4">The app allows users to share downloaded video and audio files through various external applications installed on their device, such as messaging apps or social media platforms. The app does not have access to or control over the content shared through these external applications.</string>
+    <string name="security">Security</string>
+    <string name="policy_5">The security of your personal information is important to us, but please be aware that no method of transmission over the internet or electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.</string>
+    <string name="changes_to_this_privacy_policy">Changes to This Privacy Policy</string>
+    <string name="policy_6">We may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately after they are posted on this page.</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="contact_us_">If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at askedumairbashir@gmail.com. By using the TikTok Video Downloader App, you agree to the collection and use of information in accordance with this policy.</string>
+
+
+</resources>

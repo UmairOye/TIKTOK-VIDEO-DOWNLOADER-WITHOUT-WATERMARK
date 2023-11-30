@@ -22,7 +22,7 @@ TikTok Video Downloader Without Watermark is an Android application that allows 
 
 ## Usage
 
-1. Clone the repository: `https://github.com/UmairOye/TIKTOK-VIDEO-DOWNLOADER-WITHOUT-WATERMARK/new/master?readme=1`
+1. Clone the repository: `https://github.com/UmairOye/TIKTOK-VIDEO-DOWNLOADER-WITHOUT-WATERMARK.git`
 2. Open the project in Android Studio.
 3. Build and run the application on your Android device or emulator.
 

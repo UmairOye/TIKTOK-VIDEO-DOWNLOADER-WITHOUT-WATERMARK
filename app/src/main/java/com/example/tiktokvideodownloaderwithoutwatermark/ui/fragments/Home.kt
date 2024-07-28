@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -31,6 +33,7 @@ class Home : Fragment() {
     private val viewModel: TiktokViewModel by activityViewModels()
     private var videoId: String? = null
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -108,8 +111,13 @@ class Home : Fragment() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun startReadExternalStoragePermission() {
-        this.requestReadExternalPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.R){
+            requestReadExternalPermissionLauncher.launch(Manifest.permission.READ_MEDIA_VIDEO)
+        }else{
+            requestReadExternalPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
     }
 
 
@@ -117,7 +125,12 @@ class Home : Fragment() {
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
         if (isGranted) {
-            startWriteExternalStoragePermission()
+            if(Build.VERSION.SDK_INT<=Build.VERSION_CODES.Q){
+                startWriteExternalStoragePermission()
+            }else{
+                performDownload()
+            }
+
         } else {
             viewModel.showAlertDialog(
                 getString(R.string.media_permission),
@@ -128,69 +141,14 @@ class Home : Fragment() {
     }
 
     private fun startWriteExternalStoragePermission() {
-        this.requestWriteExternalPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        requestWriteExternalPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 
     private val requestWriteExternalPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
         if (isGranted) {
-            if (binding.edUrl.text.toString().isNotEmpty()) {
-                lifecycleScope.launch {
-                    if (Utils.isValidUrl(binding.edUrl.text.toString())) {
-
-                        val dialogBuilder = AlertDialog.Builder(context)
-                        val inflater = requireActivity().layoutInflater
-                        val dialogView: View =
-                            inflater.inflate(R.layout.fetching_dialog, null, false)
-                        dialogBuilder.setView(dialogView)
-                        val alertDialog = dialogBuilder.create()
-                        alertDialog.setCancelable(false)
-
-
-
-                        alertDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                        alertDialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
-
-
-
-                        alertDialog.show()
-                        val window: Window? = alertDialog.window
-                        window!!.setLayout(
-                            ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                            ConstraintLayout.LayoutParams.WRAP_CONTENT
-                        )
-
-
-
-                        viewModel.expandShortenedUrl(binding.edUrl.text.toString())
-                        viewModel.getExpandedUrlLiveData()
-                            .observe(viewLifecycleOwner) { expandedUrl ->
-                                alertDialog.dismiss()
-                                if (expandedUrl == "Error:" || expandedUrl == "Timeout occurred:") {
-                                    showToast(expandedUrl.toString())
-                                    return@observe
-                                } else {
-                                    videoId = viewModel.extractVideoIdFromUrl(expandedUrl)
-                                    if (!TIKTOK_DOWNLOAD_PATH.exists()) {
-                                        TIKTOK_DOWNLOAD_PATH.mkdir()
-                                    }
-                                    Glide.with(requireContext())
-                                        .load("${Utils.SOURCE_IMAGEVIEW}$videoId.webp")
-                                        .into(binding.srcImage)
-
-                                    binding.edUrl.setText("")
-                                    binding.cdDownloadOptions.visibility = View.VISIBLE
-                                }
-                            }
-
-                    } else {
-                        showToast("Invalid url, please check again that pasted url is of tiktok video.")
-                    }
-                }
-            } else {
-                showToast("url is not valid!")
-            }
+            performDownload()
         } else {
 
             viewModel.showAlertDialog(
@@ -208,4 +166,62 @@ class Home : Fragment() {
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
+    private fun performDownload(){
+        if (binding.edUrl.text.toString().isNotEmpty()) {
+            lifecycleScope.launch {
+                if (Utils.isValidUrl(binding.edUrl.text.toString())) {
+
+                    val dialogBuilder = AlertDialog.Builder(context)
+                    val inflater = requireActivity().layoutInflater
+                    val dialogView: View =
+                        inflater.inflate(R.layout.fetching_dialog, null, false)
+                    dialogBuilder.setView(dialogView)
+                    val alertDialog = dialogBuilder.create()
+                    alertDialog.setCancelable(false)
+
+
+
+                    alertDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    alertDialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
+
+
+
+                    alertDialog.show()
+                    val window: Window? = alertDialog.window
+                    window!!.setLayout(
+                        ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                        ConstraintLayout.LayoutParams.WRAP_CONTENT
+                    )
+
+
+
+                    viewModel.expandShortenedUrl(binding.edUrl.text.toString())
+                    viewModel.getExpandedUrlLiveData()
+                        .observe(viewLifecycleOwner) { expandedUrl ->
+                            alertDialog.dismiss()
+                            if (expandedUrl == "Error:" || expandedUrl == "Timeout occurred:") {
+                                showToast(expandedUrl.toString())
+                                return@observe
+                            } else {
+                                videoId = viewModel.extractVideoIdFromUrl(expandedUrl)
+                                if (!TIKTOK_DOWNLOAD_PATH.exists()) {
+                                    TIKTOK_DOWNLOAD_PATH.mkdir()
+                                }
+                                Glide.with(requireContext())
+                                    .load("${Utils.SOURCE_IMAGEVIEW}$videoId.webp")
+                                    .into(binding.srcImage)
+
+                                binding.edUrl.setText("")
+                                binding.cdDownloadOptions.visibility = View.VISIBLE
+                            }
+                        }
+
+                } else {
+                    showToast("Invalid url, please check again that pasted url is of tiktok video.")
+                }
+            }
+        } else {
+            showToast("url is not valid!")
+        }
+    }
 }

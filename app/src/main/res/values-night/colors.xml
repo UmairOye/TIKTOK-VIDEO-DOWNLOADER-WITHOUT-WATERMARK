@@ -2,16 +2,16 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="bg_color">#333333</color>
+    <color name="bg_color">#fff</color>
 
-    <color name="bg_video_items">#000</color>
+    <color name="bg_video_items">#fff</color>
     <color name="bg_video_items_border">#A6A5A5</color>
 
     <color name="bg_navigation_bar">#36454F</color>
 
-    <color name="icon_color">#fff</color>
+    <color name="icon_color">#000</color>
 
-    <color name="video_items_bg">#36454F</color>
+    <color name="video_items_bg">#fff</color>
 
 
 </resources>

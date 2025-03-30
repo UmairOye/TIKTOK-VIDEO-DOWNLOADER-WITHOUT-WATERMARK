@@ -1,7 +1,11 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+
 }
 
 android {
@@ -16,6 +20,32 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val keystoreFile = project.rootProject.file("apikeys.properties")
+        val properties = Properties()
+        properties.load(keystoreFile.inputStream())
+        val apiToken = properties.getProperty("API_TOKEN") ?: ""
+        val baseUrl = properties.getProperty("BASE_URL") ?: ""
+        val endPoints = properties.getProperty("END_POINTS") ?: ""
+
+        buildConfigField(
+            type = "String",
+            name = "API_TOKEN",
+            value = apiToken
+        )
+
+        buildConfigField(
+            type = "String",
+            name = "END_POINTS",
+            value = endPoints
+        )
+
+
+        buildConfigField(
+            type = "String",
+            name = "BASE_URL",
+            value = baseUrl
+        )
     }
 
     buildTypes {
@@ -38,6 +68,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
     tasks.register<Wrapper>("wrapper") {
@@ -78,6 +109,11 @@ dependencies {
 
     //LOTTIE FILES TO SHOW ANIMATION
     implementation ("com.airbnb.android:lottie:6.2.0")
+
+    implementation ("com.google.dagger:hilt-android:2.52")
+    kapt ("com.google.dagger:hilt-compiler:2.52")
+    implementation ("com.facebook.shimmer:shimmer:0.5.0")
+
 
 
 }

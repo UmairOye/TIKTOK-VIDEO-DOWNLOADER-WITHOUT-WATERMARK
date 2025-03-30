@@ -1,4 +1,4 @@
-package com.example.tiktokvideodownloaderwithoutwatermark.models
+package com.example.tiktokvideodownloaderwithoutwatermark.domain.models
 
 import android.net.Uri
 

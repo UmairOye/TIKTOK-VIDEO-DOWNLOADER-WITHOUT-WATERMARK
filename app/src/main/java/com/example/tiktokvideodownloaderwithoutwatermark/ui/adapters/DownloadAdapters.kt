@@ -1,26 +1,21 @@
-package com.example.tiktokvideodownloaderwithoutwatermark.adapters
+package com.example.tiktokvideodownloaderwithoutwatermark.ui.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tiktokvideodownloaderwithoutwatermark.R
 import com.example.tiktokvideodownloaderwithoutwatermark.databinding.VideoItemsBinding
-import com.example.tiktokvideodownloaderwithoutwatermark.models.MediaModel
+import com.example.tiktokvideodownloaderwithoutwatermark.domain.models.MediaModel
 import com.example.tiktokvideodownloaderwithoutwatermark.utils.Utils
 import com.example.tiktokvideodownloaderwithoutwatermark.utils.Utils.showAudio
 import com.example.tiktokvideodownloaderwithoutwatermark.utils.Utils.showVideo
-import okhttp3.internal.Util
-import java.io.File
 
 class DownloadAdapters : RecyclerView.Adapter<DownloadAdapters.DownloadViewHolder>() {
     private var downloadList: ArrayList<MediaModel> = ArrayList()

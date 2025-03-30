@@ -1,37 +1,38 @@
 package com.example.tiktokvideodownloaderwithoutwatermark.ui.fragments
 
 import android.Manifest
-import android.app.AlertDialog
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
-import com.example.tiktokvideodownloaderwithoutwatermark.R
-import com.example.tiktokvideodownloaderwithoutwatermark.data.remote.viewModel.TiktokViewModel
 import com.example.tiktokvideodownloaderwithoutwatermark.utils.Utils
-import com.example.tiktokvideodownloaderwithoutwatermark.utils.Utils.TIKTOK_DOWNLOAD_PATH
 import com.example.tiktokvideodownloaderwithoutwatermark.databinding.FragmentHomeBinding
+import com.example.tiktokvideodownloaderwithoutwatermark.domain.requestStates.RequestState
+import com.example.tiktokvideodownloaderwithoutwatermark.ui.downloaderViewModel.DownloaderViewModel
 import com.example.tiktokvideodownloaderwithoutwatermark.utils.showToast
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
+@AndroidEntryPoint
 class Home : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: TiktokViewModel by activityViewModels()
-    private var videoId: String? = null
+    private val viewModel: DownloaderViewModel by activityViewModels()
+    private var downloadedUrl: String? = null
+    private var extension: String? = null
+    private var source: String? = null
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreateView(
@@ -39,12 +40,81 @@ class Home : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.btnDownload.setOnClickListener {
             hideKeyboard(binding.root)
-            startReadExternalStoragePermission()
+            activity?.let {
+                if (binding.edUrl.text.toString().isNotEmpty()) {
+                    viewModel.requestInstagramVideoDetails(binding.edUrl.text.toString())
+                } else {
+                    it.showToast("Please enter valid url")
+                }
+            }
         }
 
+        binding.downloadVideo.setOnClickListener {
+            resetStates()
+            if (downloadedUrl != null && extension != null && source != null) {
+                viewModel.downloadVideos(
+                    downloadedUrl!!, ".$extension",
+                    source!!
+                )
+
+                binding.downloadDetails.isVisible = false
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.isBitmapFetched.collect{ isBitmapFetched->
+                if(isBitmapFetched){
+                   binding.downloadImage.setImageBitmap(viewModel.bitmap)
+                }
+            }
+        }
+
+
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.instagramVideoDetail.collect { videoResponse ->
+                when (videoResponse) {
+                    is RequestState.Idle -> {
+                        binding.includeShimmer.shimmerEffect.isVisible = false
+                    }
+
+                    is RequestState.Loading -> {
+                        binding.includeShimmer.shimmerEffect.isVisible = true
+                    }
+
+                    is RequestState.Success -> {
+                        binding.apply {
+                            includeShimmer.shimmerEffect.isVisible = false
+                            includeShimmer.shimmerEffect.stopShimmer()
+
+                            downloadDetails.isVisible = true
+                            tvQuality.text = videoResponse.data.medias?.get(0)?.quality
+                            tvDuration.text = videoResponse.data.duration
+                            tvSize.text = videoResponse.data.medias?.get(0)?.formattedSize
+                            tvExtension.text = videoResponse.data.medias?.get(0)?.extension
+                            tvSource.text = videoResponse.data.source
+                        }
+
+                        videoResponse.data.medias?.get(0)?.url?.let { url ->
+                            downloadedUrl = url
+                        }
+
+                        source = videoResponse.data.source
+                        extension = videoResponse.data.medias?.get(0)?.extension
+                    }
+
+                    is RequestState.Error -> {}
+                }
+            }
+        }
 
 
         binding.clearText.setOnClickListener {
@@ -60,168 +130,27 @@ class Home : Fragment() {
                 binding.edUrl.setText("")
             }
         }
-
-
-        binding.cdAudio.setOnClickListener {
-            viewModel.downloadAudio(
-                "Video-$videoId.mp3",
-                "${Utils.DOWNLOAD_AUDIO_LINK}$videoId.mp3",
-                requireContext()
-            )
-        }
-
-        binding.cdOriginalVideo.setOnClickListener {
-            viewModel.downloadVideo(
-                "Video-Original-$videoId.mp4",
-                "${Utils.DOWNLOAD_ORIGINAL_VIDEO_LINK}$videoId.mp4",
-                requireContext()
-            )
-        }
-
-        binding.cdDownloadWithoutWaterMark.setOnClickListener {
-            viewModel.downloadVideo(
-                "Video-WM-$videoId.mp4",
-                "${Utils.DOWNLOAD_VIDEO_WITHOUT_WATERMARK}$videoId.mp4",
-                requireContext()
-            )
-        }
-
-        binding.cdDownloadWithoutWaterMarkHD.setOnClickListener {
-            viewModel.downloadVideo(
-                "Video-WMHD-$videoId.mp4",
-                "${Utils.DOWNLOAD_VIDEO_WITHOUT_WATERMARK_HD}$videoId.mp4",
-                requireContext()
-            )
-        }
-
-
-        binding.downloadAnother.setOnClickListener {
-            binding.cdDownloadOptions.visibility = View.GONE
-        }
-
-
-
-
-        return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        viewModel.resetStates()
         _binding = null
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    private fun startReadExternalStoragePermission() {
-        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.R){
-            requestReadExternalPermissionLauncher.launch(Manifest.permission.READ_MEDIA_VIDEO)
-        }else{
-            requestReadExternalPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-        }
-    }
-
-
-    private val requestReadExternalPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted ->
-        if (isGranted) {
-            if(Build.VERSION.SDK_INT<=Build.VERSION_CODES.Q){
-                startWriteExternalStoragePermission()
-            }else{
-                performDownload()
-            }
-
-        } else {
-            viewModel.showAlertDialog(
-                getString(R.string.media_permission),
-                getString(R.string.please_allow_media_permission_to_continue),
-                requireContext()
-            )
-        }
-    }
-
-    private fun startWriteExternalStoragePermission() {
-        requestWriteExternalPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-    }
-
-    private val requestWriteExternalPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted ->
-        if (isGranted) {
-            performDownload()
-        } else {
-
-            viewModel.showAlertDialog(
-                getString(R.string.media_permission),
-                getString(R.string.please_allow_media_permission_to_continue),
-                requireContext()
-
-            )
-        }
-    }
-
-
     private fun hideKeyboard(view: View) {
-        val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    private fun performDownload(){
-        if (binding.edUrl.text.toString().isNotEmpty()) {
-            lifecycleScope.launch {
-                if (Utils.isValidUrl(binding.edUrl.text.toString())) {
 
-                    val dialogBuilder = AlertDialog.Builder(context)
-                    val inflater = requireActivity().layoutInflater
-                    val dialogView: View =
-                        inflater.inflate(R.layout.fetching_dialog, null, false)
-                    dialogBuilder.setView(dialogView)
-                    val alertDialog = dialogBuilder.create()
-                    alertDialog.setCancelable(false)
-
-
-
-                    alertDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                    alertDialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
-
-
-
-                    alertDialog.show()
-                    val window: Window? = alertDialog.window
-                    window!!.setLayout(
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT
-                    )
-
-
-
-                    viewModel.expandShortenedUrl(binding.edUrl.text.toString())
-                    viewModel.getExpandedUrlLiveData()
-                        .observe(viewLifecycleOwner) { expandedUrl ->
-                            alertDialog.dismiss()
-                            if (expandedUrl == "Error:" || expandedUrl == "Timeout occurred:") {
-                                showToast(expandedUrl.toString())
-                                return@observe
-                            } else {
-                                videoId = viewModel.extractVideoIdFromUrl(expandedUrl)
-                                if (!TIKTOK_DOWNLOAD_PATH.exists()) {
-                                    TIKTOK_DOWNLOAD_PATH.mkdir()
-                                }
-                                Glide.with(requireContext())
-                                    .load("${Utils.SOURCE_IMAGEVIEW}$videoId.webp")
-                                    .into(binding.srcImage)
-
-                                binding.edUrl.setText("")
-                                binding.cdDownloadOptions.visibility = View.VISIBLE
-                            }
-                        }
-
-                } else {
-                    showToast("Invalid url, please check again that pasted url is of tiktok video.")
-                }
-            }
-        } else {
-            showToast("url is not valid!")
+    private fun resetStates(){
+        viewModel.resetStates()
+        binding.apply {
+            downloadDetails.isVisible = false
+            edUrl.setText("")
         }
     }
 }

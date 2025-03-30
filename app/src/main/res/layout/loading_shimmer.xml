@@ -1,131 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<com.facebook.shimmer.ShimmerFrameLayout
+    android:id="@+id/shimmerEffect"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:visibility="visible"
+
     android:background="@color/bg_color"
-    tools:context=".ui.fragments.Home">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_45sdp"
-        android:layout_marginStart="8dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:gravity="center|start"
-        android:background="@color/bg_color"
-        android:includeFontPadding="false"
-        android:text="@string/tiktok_downloder"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_15ssp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <EditText
-        android:id="@+id/ed_url"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_7sdp"
-        android:layout_weight="7"
-        android:autofillHints="url"
-        android:textColorHint="@color/black"
-        android:background="@drawable/editext_bg"
-        android:fontFamily="@font/poppins"
-        android:hint="@string/paste_tiktok_link_here"
-        android:includeFontPadding="false"
-        android:inputType="textUri"
-        android:paddingHorizontal="@dimen/_15sdp"
-        android:paddingVertical="@dimen/_15sdp"
-        android:singleLine="true"
-        android:textSize="@dimen/_11ssp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-
-    <ImageView
-        android:id="@+id/clear_text"
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/_5sdp"
-        android:contentDescription="@string/clear_text"
-        android:paddingHorizontal="@dimen/_6sdp"
-        android:src="@drawable/baseline_close_24"
-        app:layout_constraintBottom_toBottomOf="@+id/ed_url"
-        app:layout_constraintEnd_toEndOf="@+id/ed_url"
-        app:layout_constraintTop_toTopOf="@+id/ed_url" />
-
-
-    <TextView
-        android:id="@+id/btnPaste"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_12sdp"
-        android:background="@drawable/tv_paste"
-        android:fontFamily="@font/poppins_semibold"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:paddingVertical="@dimen/_9sdp"
-        android:text="@string/paste"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_12ssp"
-        app:layout_constraintStart_toStartOf="@+id/ed_url"
-        app:layout_constraintTop_toBottomOf="@+id/ed_url"
-        app:layout_constraintWidth_percent=".45" />
-
-    <TextView
-        android:id="@+id/btnDownload"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/tv_download"
-        android:fontFamily="@font/poppins_semibold"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:paddingVertical="@dimen/_9sdp"
-        android:text="@string/fetch_video"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_12ssp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnPaste"
-        app:layout_constraintEnd_toEndOf="@+id/ed_url"
-        app:layout_constraintTop_toTopOf="@+id/btnPaste"
-        app:layout_constraintWidth_percent=".45" />
-
-
-    <include
-        layout="@layout/loading_shimmer"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="@dimen/_7sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btnDownload"
-        app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/includeShimmer"
-        app:layout_constraintTop_toBottomOf="@+id/btnPaste"
-        />
+    android:layout_marginVertical="@dimen/_10sdp"
+    android:layout_marginHorizontal="@dimen/_7sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/downloadDetails"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        android:layout_marginVertical="@dimen/_10sdp"
-        android:layout_marginHorizontal="@dimen/_7sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btnDownload"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPaste">
-
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_color"
+        >
 
         <ImageView
-            android:id="@+id/downloadImage"
+            android:id="@+id/downloadImage123"
             android:layout_width="@dimen/_170sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_height="@dimen/_170sdp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/ic_launcher_foreground"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -141,7 +39,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/downloadImage"
+            app:layout_constraintTop_toBottomOf="@+id/downloadImage123"
             app:layout_constraintWidth_percent=".45" />
 
 
@@ -202,7 +100,6 @@
 
 
         <TextView
-            android:id="@+id/tvDuration"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
@@ -218,7 +115,6 @@
 
 
         <TextView
-            android:id="@+id/tvSource"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
@@ -233,7 +129,6 @@
 
 
         <TextView
-            android:id="@+id/tvSize"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
@@ -248,7 +143,6 @@
 
 
         <TextView
-            android:id="@+id/tvExtension"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
@@ -263,7 +157,6 @@
 
 
         <TextView
-            android:id="@+id/tvQuality"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
@@ -277,26 +170,8 @@
             app:layout_constraintWidth_percent=".45" />
 
 
-        <TextView
-            android:id="@+id/downloadVideo"
-            android:layout_width="0dp"
-            android:background="#FF5722"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_semibold"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:paddingVertical="@dimen/_9sdp"
-            android:text="@string/download"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_13ssp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7"
-       />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.facebook.shimmer.ShimmerFrameLayout>

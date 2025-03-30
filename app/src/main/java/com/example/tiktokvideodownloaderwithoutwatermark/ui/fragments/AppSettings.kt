@@ -10,71 +10,49 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.tiktokvideodownloaderwithoutwatermark.R
-import com.example.tiktokvideodownloaderwithoutwatermark.data.remote.viewModel.TiktokViewModel
 import com.example.tiktokvideodownloaderwithoutwatermark.databinding.FragmentAppSettingsBinding
-import com.example.tiktokvideodownloaderwithoutwatermark.models.folderModel
+import com.example.tiktokvideodownloaderwithoutwatermark.domain.models.FolderModel
 import com.example.tiktokvideodownloaderwithoutwatermark.utils.Utils
+import com.example.tiktokvideodownloaderwithoutwatermark.utils.showToast
 
 
 class AppSettings : Fragment(){
     private var _binding: FragmentAppSettingsBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: TiktokViewModel by activityViewModels()
-    private val list: ArrayList<folderModel> = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAppSettingsBinding.inflate(inflater, container, false)
-
-        binding.storagePath.text = Utils.TIKTOK_DOWNLOAD_PATH.absolutePath
-        binding.appVersion.text = "1.0"
-        binding.storagePath.isSelected = true
-
-        binding.cdPrivcyPolicy.setOnClickListener {
-            try {
-                findNavController().navigate(R.id.action_action_settings_to_privacyPolicy)
-            } catch (ex: Exception) {
-                ex.printStackTrace()
-            }
-        }
-
-        binding.cdShare.setOnClickListener { shareAppLink() }
-
-        binding.cdRateUs.setOnClickListener { openPlayStore() }
-
         return binding.root
     }
 
 
-    private fun shareAppLink() {
-        val appLink =
-            "https://play.google.com/store/apps/details?id=${requireContext().packageName}"
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.type = "text/plain"
-        intent.putExtra(Intent.EXTRA_TEXT, appLink)
-        startActivity(Intent.createChooser(intent, "Share App Link"))
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            storagePath.text = Utils.TIKTOK_DOWNLOAD_PATH.absolutePath
+            appVersion.text = getString(R.string._1_1)
+            storagePath.isSelected = true
+            cdShare.setOnClickListener {
+                val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                    data = Uri.parse("mailto:")
+                    putExtra(Intent.EXTRA_EMAIL, arrayOf("askedumairbashir@gmail.com"))
+                    putExtra(Intent.EXTRA_SUBJECT, "Github Project")
+                    putExtra(Intent.EXTRA_TEXT, "Hi Umair!")
+                }
 
-    private fun openPlayStore() {
-        val appPackageName = requireActivity().packageName
-        try {
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("market://details?id=$appPackageName")
-                )
-            )
-        } catch (e: android.content.ActivityNotFoundException) {
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("https://play.google.com/store/apps/details?id=$appPackageName")
-                )
-            )
+                activity?.let {
+                    if (emailIntent.resolveActivity(it.packageManager) != null) {
+                        startActivity(emailIntent)
+                    } else {
+                        activity?.showToast("No email app found")
+                    }
+                }
+
+            }
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

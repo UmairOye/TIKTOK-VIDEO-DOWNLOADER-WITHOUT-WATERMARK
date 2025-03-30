@@ -9,16 +9,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.tiktokvideodownloaderwithoutwatermark.R
-import com.example.tiktokvideodownloaderwithoutwatermark.adapters.FolderAdapter
-import com.example.tiktokvideodownloaderwithoutwatermark.data.remote.viewModel.TiktokViewModel
+import com.example.tiktokvideodownloaderwithoutwatermark.ui.adapters.FolderAdapter
 import com.example.tiktokvideodownloaderwithoutwatermark.databinding.FragmentDownloadBinding
-import com.example.tiktokvideodownloaderwithoutwatermark.models.folderModel
+import com.example.tiktokvideodownloaderwithoutwatermark.domain.models.FolderModel
 import kotlinx.coroutines.launch
 
 class Download : Fragment() {
     private var _binding: FragmentDownloadBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: TiktokViewModel by activityViewModels()
+//    private val viewModel: TiktokViewModel by activityViewModels()
     private lateinit var adapter: FolderAdapter
 
     override fun onCreateView(
@@ -32,15 +31,15 @@ class Download : Fragment() {
         binding.recyclerView.setHasFixedSize(true)
 
         lifecycleScope.launch {
-            val list = viewModel.getFolderInfo()
-            if (list.isNotEmpty()) {
-                binding.textView2.visibility = View.GONE
-                adapter.submitList(list)
-            }
+//            val list = viewModel.getFolderInfo()
+//            if (list.isNotEmpty()) {
+//                binding.textView2.visibility = View.GONE
+//                adapter.submitList(list)
+//            }
         }
 
         adapter.setOnClickListener(listener = object : FolderAdapter.OnClickListener {
-            override fun onItemClick(item: folderModel) {
+            override fun onItemClick(item: FolderModel) {
                 try {
                     val bundle = Bundle()
                     when (item.name) {

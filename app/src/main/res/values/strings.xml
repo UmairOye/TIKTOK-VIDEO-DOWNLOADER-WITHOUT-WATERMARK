@@ -14,8 +14,8 @@
     <string name="video_items">video items</string>
     <string name="_25_mb">25 MB</string>
     <string name="_0_00">0:00</string>
-    <string name="tiktok_downloder">TK Downloder</string>
-    <string name="paste_tiktok_link_here">Paste Tiktok link here…</string>
+    <string name="tiktok_downloder">Social Media Downloader</string>
+    <string name="paste_tiktok_link_here">Paste social media link here…</string>
     <string name="home">Home</string>
     <string name="app_settings">app_settings</string>
     <string name="no_ads">no_ads</string>
@@ -71,6 +71,15 @@
     <string name="policy_6">We may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are effective immediately after they are posted on this page.</string>
     <string name="contact_us">Contact Us</string>
     <string name="contact_us_">If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at askedumairbashir@gmail.com. By using the TikTok Video Downloader App, you agree to the collection and use of information in accordance with this policy.</string>
+    <string name="quality">Quality:</string>
+    <string name="extension">Extension:</string>
+    <string name="size">Size:</string>
+    <string name="source">Source:</string>
+    <string name="duration">Duration:</string>
+    <string name="hashes">----</string>
+    <string name="fetch_video">Fetch Video</string>
+    <string name="_1_1">1.1</string>
+    <string name="contact_with_developer">Contact with developer</string>
 
 
 </resources>

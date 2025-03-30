@@ -23,32 +23,6 @@
             android:orientation="vertical">
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:id="@+id/cdRateUs"
-                android:layout_height="@dimen/_40sdp"
-                android:orientation="horizontal"
-                android:background="@drawable/bg_settings"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:gravity="start|center"
-                >
-
-                <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
-                    android:contentDescription="@string/rate"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:src="@drawable/rate_me"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/rate_us"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    />
-
-            </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -145,32 +119,6 @@
                 android:background="#C5C5C5"
                 />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:id="@+id/cdPrivcyPolicy"
-                android:layout_height="@dimen/_40sdp"
-                android:orientation="horizontal"
-                android:background="@drawable/bg_settings"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:gravity="start|center"
-                >
-
-                <ImageView
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
-                    android:contentDescription="@string/privacy_policy"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:src="@drawable/privacy_policy"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/privacy_policy"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    />
-
-            </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

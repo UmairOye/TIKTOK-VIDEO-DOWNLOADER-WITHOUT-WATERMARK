@@ -7,11 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
+import android.widget.Toast
 import com.example.tiktokvideodownloaderwithoutwatermark.R
 import com.example.tiktokvideodownloaderwithoutwatermark.databinding.FragmentAppSettingsBinding
-import com.example.tiktokvideodownloaderwithoutwatermark.domain.models.FolderModel
 import com.example.tiktokvideodownloaderwithoutwatermark.utils.Utils
 import com.example.tiktokvideodownloaderwithoutwatermark.utils.showToast
 
@@ -34,20 +32,24 @@ class AppSettings : Fragment(){
             storagePath.text = Utils.TIKTOK_DOWNLOAD_PATH.absolutePath
             appVersion.text = getString(R.string._1_1)
             storagePath.isSelected = true
-            cdShare.setOnClickListener {
-                val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+            cdContact.setOnClickListener {
+                val emailIntent = Intent().apply {
+                    action = Intent.ACTION_SEND
                     data = Uri.parse("mailto:")
+                    type = "text/plain"
                     putExtra(Intent.EXTRA_EMAIL, arrayOf("askedumairbashir@gmail.com"))
-                    putExtra(Intent.EXTRA_SUBJECT, "Github Project")
-                    putExtra(Intent.EXTRA_TEXT, "Hi Umair!")
+                    putExtra(Intent.EXTRA_SUBJECT, "Github Project Issue")
+                    putExtra(Intent.EXTRA_TEXT, "Hi Umair! I have an issue with your project.")
                 }
-
-                activity?.let {
-                    if (emailIntent.resolveActivity(it.packageManager) != null) {
-                        startActivity(emailIntent)
-                    } else {
-                        activity?.showToast("No email app found")
-                    }
+                if (emailIntent.resolveActivity(requireContext().packageManager) != null) {
+                    emailIntent.setPackage("com.google.android.gm")
+                    startActivity(emailIntent)
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "No app available to send email!!",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
             }

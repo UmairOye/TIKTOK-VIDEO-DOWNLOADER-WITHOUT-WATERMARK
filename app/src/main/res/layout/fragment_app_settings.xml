@@ -22,18 +22,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:background="#C5C5C5"
-                />
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:id="@+id/cdShare"
+                android:id="@+id/cdContact"
                 android:layout_height="@dimen/_40sdp"
                 android:orientation="horizontal"
                 android:background="@drawable/bg_settings"
@@ -46,17 +37,26 @@
                     android:layout_height="@dimen/_25sdp"
                     android:contentDescription="@string/share"
                     android:layout_marginStart="@dimen/_8sdp"
-                    android:src="@drawable/share"
+                    android:src="@drawable/email"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/share"
+                    android:text="@string/contact_with_developer"
                     android:layout_marginStart="@dimen/_10sdp"
                     />
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:background="#C5C5C5"
+                />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -119,13 +119,7 @@
                 android:background="#C5C5C5"
                 />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:background="#C5C5C5"
-                />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -166,13 +160,7 @@
                 </LinearLayout>
 
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:background="#C5C5C5"
-                />
+
 
         </LinearLayout>
     </ScrollView>

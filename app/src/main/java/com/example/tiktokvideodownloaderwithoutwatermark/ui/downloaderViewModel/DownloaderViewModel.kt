@@ -25,6 +25,8 @@ class DownloaderViewModel @Inject constructor(private val apiRepository: ApiRepo
 
 
 
+
+
     fun requestInstagramVideoDetails(url: String){
         _instagramVideoDetail.value = RequestState.Loading
         viewModelScope.launch {

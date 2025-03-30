@@ -8,6 +8,8 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tiktokvideodownloaderwithoutwatermark.R
@@ -17,21 +19,17 @@ import com.example.tiktokvideodownloaderwithoutwatermark.utils.Utils
 import com.example.tiktokvideodownloaderwithoutwatermark.utils.Utils.showAudio
 import com.example.tiktokvideodownloaderwithoutwatermark.utils.Utils.showVideo
 
-class DownloadAdapters : RecyclerView.Adapter<DownloadAdapters.DownloadViewHolder>() {
-    private var downloadList: ArrayList<MediaModel> = ArrayList()
+class DownloadAdapter :
+    ListAdapter<MediaModel, DownloadAdapter.DownloadViewHolder>(DownloadDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DownloadViewHolder {
-        val binding =
-            VideoItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = VideoItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DownloadViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return downloadList.size
-    }
-
     override fun onBindViewHolder(holder: DownloadViewHolder, position: Int) {
-        holder.bind(downloadList[position])
+        val item = getItem(position)
+        holder.bind(item)
     }
 
     class DownloadViewHolder(private val binding: VideoItemsBinding) :
@@ -41,12 +39,11 @@ class DownloadAdapters : RecyclerView.Adapter<DownloadAdapters.DownloadViewHolde
                 .placeholder(R.drawable.music).into(binding.tvImgMedia)
             binding.tvVideoName.text = item.name
             binding.tvVideoName.isSelected = true
-            (item.size + " - " + item.duration).also { binding.tvVideoDetails.text = it }
+            binding.tvVideoDetails.text = "${item.size} - ${item.duration}"
 
             binding.imgMore.setOnClickListener {
                 showPopupMenu(binding.imgMore, binding.root.context, item.uri)
             }
-
         }
 
         private fun showPopupMenu(view: View, context: Context, uri: Uri) {
@@ -81,11 +78,14 @@ class DownloadAdapters : RecyclerView.Adapter<DownloadAdapters.DownloadViewHolde
             popupMenu.show()
         }
     }
+}
 
-    fun submitList(list: ArrayList<MediaModel>) {
-        this.downloadList = list
-        notifyDataSetChanged()
+class DownloadDiffCallback : DiffUtil.ItemCallback<MediaModel>() {
+    override fun areItemsTheSame(oldItem: MediaModel, newItem: MediaModel): Boolean {
+        return oldItem.uri == newItem.uri
     }
 
-
+    override fun areContentsTheSame(oldItem: MediaModel, newItem: MediaModel): Boolean {
+        return oldItem == newItem
+    }
 }

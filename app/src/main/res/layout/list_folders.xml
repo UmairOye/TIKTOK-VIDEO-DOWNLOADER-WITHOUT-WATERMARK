@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_margin="@dimen/_5sdp"
     android:id="@+id/cdMain"
@@ -43,4 +44,15 @@
         app:layout_constraintBottom_toBottomOf="@+id/tvFolderName"
         app:layout_constraintStart_toEndOf="@+id/tvFolderName"
         app:layout_constraintTop_toTopOf="@+id/tvFolderName" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:contentDescription="@string/app_name"
+        android:layout_width="wrap_content"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:srcCompat="@drawable/baseline_arrow_forward_ios_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>

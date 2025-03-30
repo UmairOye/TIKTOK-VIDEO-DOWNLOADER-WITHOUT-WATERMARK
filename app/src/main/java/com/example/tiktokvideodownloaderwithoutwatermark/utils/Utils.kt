@@ -15,13 +15,6 @@ import java.net.MalformedURLException
 import java.net.URL
 
 object Utils {
-    val DOWNLOAD_AUDIO_LINK = "https://www.tikwm.com/video/music/"
-    val DOWNLOAD_ORIGINAL_VIDEO_LINK = "https://www.tikwm.com/video/media/wmplay/"
-    val DOWNLOAD_VIDEO_WITHOUT_WATERMARK = "https://www.tikwm.com/video/media/play/"
-    val DOWNLOAD_VIDEO_WITHOUT_WATERMARK_HD = "https://www.tikwm.com/video/media/hdplay/"
-    val SOURCE_IMAGEVIEW = "https://www.tikwm.com/video/cover/"
-
-
     val TIKTOK_DOWNLOAD_PATH = File(
         Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
         "TIKTOK VIDEO DOWNLOADER"

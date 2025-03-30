@@ -10,43 +10,34 @@ import androidx.lifecycle.lifecycleScope
 import com.example.tiktokvideodownloaderwithoutwatermark.ui.adapters.DownloadAdapters
 import com.example.tiktokvideodownloaderwithoutwatermark.databinding.FragmentMediaItemsBinding
 import com.example.tiktokvideodownloaderwithoutwatermark.domain.models.MediaModel
+import com.example.tiktokvideodownloaderwithoutwatermark.ui.downloaderViewModel.DownloaderViewModel
 import com.example.tiktokvideodownloaderwithoutwatermark.utils.Utils
 import kotlinx.coroutines.launch
 
 class MediaItems : Fragment() {
     private var _binding: FragmentMediaItemsBinding? = null
     private val binding get() = _binding!!
-//    private val viewModel: TiktokViewModel by activityViewModels()
+    private val viewModel: DownloaderViewModel by activityViewModels()
     private lateinit var adapter: DownloadAdapters
-    private var list: ArrayList<MediaModel> = ArrayList()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMediaItemsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        val arguments: String? = requireArguments().getString("MEDIA")
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         adapter = DownloadAdapters()
         binding.recyclerView.adapter = adapter
         binding.recyclerView.setHasFixedSize(true)
 
-        lifecycleScope.launch {
-            when (arguments) {
-                "audio" -> {
-//                    list =
-//                        viewModel.getAudiosFromFolder(requireContext(), Utils.AUDIOS.absolutePath)
-//                    adapter.submitList(list)
-                }
+        viewLifecycleOwner.lifecycleScope.launch {
 
-                "video" -> {
-//
-                }
-            }
         }
 
 
-        return binding.root
     }
 
     override fun onDestroyView() {

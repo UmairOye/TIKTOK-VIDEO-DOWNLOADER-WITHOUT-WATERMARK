@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.provider.MediaStore
 import android.util.Base64
 import android.widget.Toast
 import com.example.tiktokvideodownloaderwithoutwatermark.BuildConfig
@@ -12,6 +13,7 @@ import com.example.tiktokvideodownloaderwithoutwatermark.domain.repository.ApiRe
 import com.example.tiktokvideodownloaderwithoutwatermark.domain.requestStates.RequestState
 import com.example.tiktokvideodownloaderwithoutwatermark.domain.models.VideoRequest
 import com.example.tiktokvideodownloaderwithoutwatermark.domain.models.VideoResponse
+import com.example.tiktokvideodownloaderwithoutwatermark.utils.Utils.TIKTOK_DOWNLOAD_PATH
 import com.example.tiktokvideodownloaderwithoutwatermark.utils.Utils.VIDEOS
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers

@@ -42,6 +42,7 @@ class Download : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.downloadFolders.collect{ folderList ->
                 if(folderList.isNotEmpty()){
+                    binding.pb.isVisible = false
                     adapter.submitList(folderList)
                 }else{
                     binding.textView2.isVisible = true

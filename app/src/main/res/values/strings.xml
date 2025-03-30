@@ -80,6 +80,7 @@
     <string name="fetch_video">Fetch Video</string>
     <string name="_1_1">1.1</string>
     <string name="contact_with_developer">Contact with developer</string>
+    <string name="nothing_found">Nothing found.</string>
 
 
 </resources>

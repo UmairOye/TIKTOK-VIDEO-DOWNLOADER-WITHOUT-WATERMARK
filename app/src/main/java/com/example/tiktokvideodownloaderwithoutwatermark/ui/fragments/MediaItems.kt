@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.tiktokvideodownloaderwithoutwatermark.databinding.FragmentMediaItemsBinding
@@ -35,6 +36,7 @@ class MediaItems : Fragment() {
             viewModel.fetchVideoFiles(Utils.VIDEOS.absolutePath)
             viewModel.downloadVideos.collect { videoList ->
                 if(videoList.isNotEmpty()){
+                    binding.pb.isVisible = false
                     adapter.submitList(videoList)
                 }
             }

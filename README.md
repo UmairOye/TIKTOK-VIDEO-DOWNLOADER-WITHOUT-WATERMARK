@@ -40,13 +40,7 @@ This project follows the **MVVM (Model-View-ViewModel)** architecture to ensure 
 
 ## Screenshots
 
-![Home Screen](screenshots/home_screen.png)
-
-*Home Screen of the Social Media Video Downloader app.*
-
-![Download Options](screenshots/download_options.png)
-
-*Select video quality and format before downloading.*
+https://github.com/user-attachments/assets/252846b5-9bf5-4b40-bf8c-7ed5364fc267
 
 ---
 

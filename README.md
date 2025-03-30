@@ -1,42 +1,114 @@
-# TikTok Video Downloader Without Watermark
+# Social Media Video Downloader
 
 ## Overview
 
-TikTok Video Downloader Without Watermark is an Android application that allows users to download TikTok videos without watermarks. The app provides the functionality to download videos in normal and HD quality, and it also allows users to download the original video and audio separately. Videos are stored in the mobile storage and can be viewed within the app or in the device gallery.
+**Social Media Video Downloader** is an Android application that allows users to download videos from multiple social media platforms, including:
+
+- **TikTok**
+- **Instagram**
+- **LinkedIn**
+- **Pinterest**
+- **Reddit**
+- **Twitter**
+- **Facebook**
+
+This app offers high-quality downloads, offline access, and an intuitive UI for easy navigation.
+
+---
 
 ## Features
 
-- Download TikTok videos without watermarks
-- Support for normal and HD video quality
-- Download original video and audio separately
-- Storage of videos in the mobile device
-- In-app video viewer and gallery support
+- ✅ **Multi-Platform Support** – Download videos from various social media platforms.
+- ✅ **High-Quality Downloads** – Supports SD, HD, and Full HD video downloads.
+- ✅ **MVVM Architecture** – Clean and scalable codebase.
+- ✅ **Kotlin Flows** – Reactive programming for smooth UI updates.
+- ✅ **Hilt Dependency Injection** – Efficient dependency management.
+- ✅ **Offline Viewing** – Save and watch downloaded videos without internet.
+- ✅ **User-Friendly Interface** – Simple and easy-to-use UI.
 
-## Technologies Used
+---
 
-- Kotlin
-- Retrofit for network calls
-- Navigation for fragment navigation
-- Lottie for displaying loading dialogs
-- SSP and SDP dependencies for responsive UI
+## Project Architecture
 
-## Usage
+This project follows the **MVVM (Model-View-ViewModel)** architecture to ensure a structured and scalable codebase. It includes:
 
-1. Clone the repository: `https://github.com/UmairOye/TIKTOK-VIDEO-DOWNLOADER-WITHOUT-WATERMARK.git`
-2. Open the project in Android Studio.
-3. Build and run the application on your Android device or emulator.
+- **Kotlin Flows** for reactive and efficient data handling.
+- **Hilt DI** for dependency injection to improve modularity and testability.
+- **Coroutines** for smooth background operations.
 
-## Dependencies
-
-- Retrofit: [Link to Retrofit](https://square.github.io/retrofit/)
-- Lottie: [Link to Lottie](https://airbnb.design/lottie/)
-- SSP: [Link to SSP](https://github.com/intuit/sdp)
-- SDP: [Link to SDP](https://github.com/intuit/ssp)
+---
 
 ## Screenshots
 
-<img width="150" height="300" src="https://github.com/UmairOye/TIKTOK-VIDEO-DOWNLOADER-WITHOUT-WATERMARK/blob/master/screenshots/Screenshot_20231130-145720_TK%20Video%20Downloader.jpg" alt="Image" >   <img width="150" height="300" src="https://github.com/UmairOye/TIKTOK-VIDEO-DOWNLOADER-WITHOUT-WATERMARK/blob/master/screenshots/Screenshot_20231130-145725_TK%20Video%20Downloader.jpg" alt="Image" >   <img width="150" height="300" src="https://github.com/UmairOye/TIKTOK-VIDEO-DOWNLOADER-WITHOUT-WATERMARK/blob/master/screenshots/Screenshot_20231130-145727_TK%20Video%20Downloader.jpg" alt="Image" >  <img width="150" height="300" src="https://github.com/UmairOye/TIKTOK-VIDEO-DOWNLOADER-WITHOUT-WATERMARK/blob/master/screenshots/Screenshot_20231130-145736_TK%20Video%20Downloader.jpg" alt="Image" >
+![Home Screen](screenshots/home_screen.png)
 
-## Don't Forget to Star ⭐
+*Home Screen of the Social Media Video Downloader app.*
 
-If you found this project useful or had fun exploring it, please consider giving it a star. It's a great way to show your appreciation and it puts a smile on my face! 😊🌟
+![Download Options](screenshots/download_options.png)
+
+*Select video quality and format before downloading.*
+
+---
+
+## Installation & Setup
+
+### Prerequisites
+
+- Android Studio (Latest Version)
+- Device running **Android 7.0 (Nougat)** or higher
+- Internet connection for API calls
+
+### Steps to Set Up
+
+1. **Clone the Repository:**
+   ```sh
+   git clone https://github.com/UmairOye/Social-Media-Video-Downloader.git
+   ```
+
+2. **Open in Android Studio:**
+   - Open **Android Studio**
+   - Select **"Open an existing project"**
+   - Navigate to the cloned directory
+
+3. **Sync Dependencies:**
+   - Ensure **Gradle sync** is completed
+   - Build the project successfully
+
+4. **Run the App:**
+   - Connect a physical device (or use an emulator)
+   - Click the **Run ▶ button** in Android Studio
+
+---
+
+## Usage
+
+1. **Select a Platform** – Choose the social media platform.
+2. **Paste Video URL** – Copy and paste the link to the video.
+3. **Choose Video Quality** – Select the resolution and format.
+4. **Download** – Tap the download button to save the video.
+5. **View & Share** – Access downloaded videos from the app and share them.
+
+---
+
+## Contributing
+
+Contributions are welcome! To contribute:
+
+1. **Fork the Repository**
+2. **Create a Feature Branch:**
+   ```sh
+   git checkout -b feature/YourFeatureName
+   ```
+3. **Commit Your Changes:**
+   ```sh
+   git commit -m "Add new feature"
+   ```
+4. **Push to GitHub:**
+   ```sh
+   git push origin feature/YourFeatureName
+   ```
+5. **Create a Pull Request**
+
+
+
+
